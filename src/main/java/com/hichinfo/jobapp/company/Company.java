@@ -1,6 +1,8 @@
 package com.hichinfo.jobapp.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hichinfo.jobapp.job.Job;
+import com.hichinfo.jobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,11 +16,20 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<Job> jobs;
 
-    // reviews too
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Company() {
     }

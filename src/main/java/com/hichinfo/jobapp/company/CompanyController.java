@@ -39,4 +39,23 @@ public class CompanyController {
 
         return new ResponseEntity<>("Company not found..", HttpStatus.NOT_FOUND);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompany(@PathVariable Long id){
+        boolean delete = companyService.deleteById(id);
+        if (delete){
+            return new ResponseEntity<>("Company deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Company not found.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> getCompany(@PathVariable Long id){
+        Company company = companyService.getCompany(id);
+        if (company != null){
+            return new ResponseEntity<>(company, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

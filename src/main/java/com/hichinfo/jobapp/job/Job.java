@@ -1,5 +1,7 @@
 package com.hichinfo.jobapp.job;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hichinfo.jobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +17,8 @@ public class Job {
     private Double maxSalary;
 
     private String location;
+    @ManyToOne
+    private Company company;
 
     public Job() {
     }
@@ -26,6 +30,14 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getId() {
